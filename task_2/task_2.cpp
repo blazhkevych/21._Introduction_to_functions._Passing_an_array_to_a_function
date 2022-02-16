@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-int Factorial(int number)
+int Factorial(int number) // Функция, вычисляющая факториал переданного ей числа.
 {
 	int result{ 1 };
 
