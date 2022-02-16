@@ -5,16 +5,14 @@
 */
 
 #include <iostream>
-#include <iomanip>
-using std::cout;
-using std::cin;
-using std::endl;
-using std::setw; // setw(4) - Задает ширину поля отображения для следующего элемента в потоке.
+using namespace std;
 
-bool IsPrime(int number) // Функция проверяющая является ли число простым. /2
+bool IsPrime(int number) // Функция проверяющая является ли число простым.
 {
-	for (int i = 2; i * i <= number; i++)
-		if (number % i == 0)
+	if (number < 2)
+		return false;
+	for (int i = 2; i * i <= number; i++) // Проверка до квадратного корня из number.
+		if (number % i == 0) // Если найден другой делитель числа number.
 			return false;
 	return true;
 }
@@ -26,7 +24,7 @@ int main()
 	int number{ 0 };
 	cin >> number;
 
-	cout << endl << bool(IsPrime(number));
+	cout << endl << boolalpha << IsPrime(number) << endl; // boolalpha позволяет вводить и выводить булевы значения с помощью ключевых слов true и false.
 
 	return 0;
 }
