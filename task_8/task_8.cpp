@@ -7,26 +7,39 @@
 */
 // НЕ РАБОТАЕТ
 
+/*
+Возможно, стоит еще дописать ф-ю сравнения введенных дат на то, чтобы вторая дата была больше первой.
+*/
+
 #include <iostream>
 using namespace std;
 
+bool IsItALeapYear(int year) // Функция, проверяющая является ли год високосным.
+{
+	if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+		return true;
+	else
+		return false;
+}
+
+enum Months
+{
+	January = 1, // Январь, 31 день
+	February = 2, // Февраль, 28 дней (В високосные годы вводится дополнительный день — 29 февраля.)
+	March = 3, // Март, 31 день 
+	April = 4, // Апрель, 30 дней 
+	May = 5, // Май, 31 день 
+	June = 6, // Июнь, 30 дней 
+	July = 7, // Июль, 31 день 
+	August = 8, // Август, 31 день 
+	September = 9, // Сентябрь, 30 дней 
+	October = 10, // Октябрь, 31 день 
+	November = 11, // Ноябрь, 30 дней 
+	December = 12 // Декабрь, 31 день 
+};
+
 bool DateValidationCheck(int day, int month, int year) // Функция, проверяющая корректность введенных значений даты.
 {
-	enum Months
-	{
-		January = 1, // Январь, 31 день
-		February = 2, // Февраль, 28 дней (В високосные годы вводится дополнительный день — 29 февраля.)
-		March = 3, // Март, 31 день 
-		April = 4, // Апрель, 30 дней 
-		May = 5, // Май, 31 день 
-		June = 6, // Июнь, 30 дней 
-		July = 7, // Июль, 31 день 
-		August = 8, // Август, 31 день 
-		September = 9, // Сентябрь, 30 дней 
-		October = 10, // Октябрь, 31 день 
-		November = 11, // Ноябрь, 30 дней 
-		December = 12 // Декабрь, 31 день 
-	};
 
 	//cout << "Введите год ( > 1 ):" << endl;
 	//cin >> year;
@@ -97,44 +110,133 @@ bool DateValidationCheck(int day, int month, int year) // Функция, про
 		return false;//cout << "Введите корректный год." << endl;
 }
 
-bool IsItALeapYear(int year) // Функция, проверяющая является ли год високосным.
-{
-	if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-		return true;
-	else
-		return false;
-}
-
 int DifferenceInDaysBetweenDates(
 	int day1, int month1, int year1,
 	int day2, int month2, int year2) // Функция, вычисляет разность в днях между этими датами.
 {
-	int differenceIs{ 0 };
+	int differenceIs{ 0 }; // Счетчик разности в днях между этими датами.
 
+	if (year1 == year2 && month1 == month2 && day1 == day2) // Если даты равны.
+	{
+		return differenceIs = 0;
+	}
+	else
+	{
+		while (year1 != year2 && month1 != month2 && day1 != day2) // Пока даты не равны, вычисляем следующую дату.
+		{
+			switch (month1)
+			{
+			case April: // Расчет следующей даты за введенной, для месяцев c 30 днями.
+			case June:
+			case September:
+			case November:
+				day1++;
+				if (day1 > 30)
+				{
+					day1 = 1;
+					month1++;
+					if (month1 > 12)
+					{
+						month1 = 1;
+						year1++;
+					}
+				}
+				break;
 
+			case January: // Расчет следующей даты за введенной, для месяцев c 31 днем.
+			case March:
+			case May:
+			case July:
+			case August:
+			case October:
+			case December:
+				day1++;
+				if (day1 > 31)
+				{
+					day1 = 1;
+					month1++;
+					if (month1 > 12)
+					{
+						month1 = 1;
+						year1++;
+					}
+				}
+				break;
+
+			case February: // Расчет следующей даты за введенной, для февраля (как высокосного так и не високосного).
+				day1++;
+				if (!(year1 % 400 == 0 || (year1 % 100 != 0 && year1 % 4 == 0)) && (day1 > 28)) // Не високосный.
+				{
+					day1 = 1;
+					month1++;
+					if (month1 > 12)
+					{
+						month1 = 1;
+						year1++;
+					}
+				}
+				else if ((year1 % 400 == 0 || (year1 % 100 != 0 && year1 % 4 == 0)) && (day1 > 29)) // Високосный.
+				{
+					day1 = 1;
+					month1++;
+					if (month1 > 12)
+					{
+						month1 = 1;
+						year1++;
+					}
+				}
+				break;
+			}
+			//cout << "Следующая дата: " << day1 << '.' << month1 << '.' << year1 << endl;
+			differenceIs++;
+		}
+	}
+	return differenceIs;
 }
-
-
 
 int main()
 {
 	setlocale(LC_ALL, ""); // Работает только с потоком вывода.
 
-	int day1{ 0 }, month1{ 0 }, year1{ 0 };
-	while (DateValidationCheck(day1, month1, year1) == false)
-	{
-		cout << "Введите 1-ю дату, сначала день, месяц, затем год (22.9.2019): ";
-		cin >> day1 >> month1 >> year1;
-	};
+	cout << "True:\n";
+	cout << boolalpha << DateValidationCheck(29, 2, 2001) << endl;
+	cout << "False:\n";
 
-	int day2{ 0 }, month2{ 0 }, year2{ 0 };
-	while (DateValidationCheck(day1, month1, year1) == false)
-	{
-		cout << "Введите 2-ю дату, сначала день, месяц, затем год (1.10.2021): ";
-		cin >> day2 >> month2 >> year2;
-	}
+		/*cout << boolalpha << IsItALeapYear(15) << endl; // Задачу выполняет исправно, тесты прошла.
+		cout << boolalpha << IsItALeapYear(1700) << endl;
+		cout << boolalpha << IsItALeapYear(1800) << endl;
+		cout << boolalpha << IsItALeapYear(2007) << endl;
+		cout << boolalpha << IsItALeapYear(2021) << endl;
+		cout << boolalpha << IsItALeapYear(2022) << endl;*/
 
 
 
-	return 0;
+
+
+
+
+
+
+
+
+
+		/*int day1{ 0 }, month1{ 0 }, year1{ 0 };
+		while (DateValidationCheck(day1, month1, year1) == false)
+		{
+			cout << "Введите 1-ю дату, сначала день, месяц, затем год (22.9.2019): \n";
+			cin >> day1 >> month1 >> year1;
+			cout << endl;
+		}
+
+		int day2{ 0 }, month2{ 0 }, year2{ 0 };
+		while (DateValidationCheck(day2, month2, year2) == false)
+		{
+			cout << "Введите 2-ю дату, сначала день, месяц, затем год (1.10.2021): \n";
+			cin >> day2 >> month2 >> year2;
+			cout << endl;
+		}
+
+		cout << "Разность в днях между этими датами = " << DifferenceInDaysBetweenDates(day1, month1, year1, day2, month2, year2);*/
+
+		return 0;
 }
