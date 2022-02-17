@@ -197,17 +197,19 @@ int DifferenceInDaysBetweenDates(
 int main()
 {
 	setlocale(LC_ALL, ""); // Работает только с потоком вывода.
-
-	cout << "True:\n";
-	cout << boolalpha << DateValidationCheck(29, 2, 2001) << endl;
-	cout << "False:\n";
-
-		/*cout << boolalpha << IsItALeapYear(15) << endl; // Задачу выполняет исправно, тесты прошла.
+/*cout << boolalpha << IsItALeapYear(15) << endl; // Задачу выполняет исправно, тесты прошла.
 		cout << boolalpha << IsItALeapYear(1700) << endl;
 		cout << boolalpha << IsItALeapYear(1800) << endl;
 		cout << boolalpha << IsItALeapYear(2007) << endl;
 		cout << boolalpha << IsItALeapYear(2021) << endl;
 		cout << boolalpha << IsItALeapYear(2022) << endl;*/
+
+	//Допроверить работу функций DateValidationCheck и DifferenceInDaysBetweenDates
+	cout << "True:\n";
+	cout << boolalpha << DateValidationCheck(29, 2, 2001) << endl;
+	cout << "False:\n";
+
+		
 
 
 
