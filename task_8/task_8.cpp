@@ -209,6 +209,7 @@ int main()
 	cout << boolalpha << DateValidationCheck(29, 2, 2001) << endl;
 	cout << "False:\n";
 
+	// https://github.com/blazhkevych/8_Conditional_Operator_IF_Operator_SWITCH/blob/master/task_4/task_4.cpp
 		
 
 
