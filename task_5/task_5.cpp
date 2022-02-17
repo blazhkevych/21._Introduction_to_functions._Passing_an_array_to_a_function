@@ -22,7 +22,7 @@ bool PerfectNumber(int number) // Функция проверки на сове�
 	return false;
 }
 
-void PrintPerfectNumber(int start, int end)
+void PrintPerfectNumber(int start, int end) // Функция печати совершенного числа
 {
 	for (int i = start; i < end; i++) // Числа из диапазона.
 	{
