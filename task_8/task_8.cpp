@@ -110,7 +110,8 @@ int DifferenceInDaysBetweenDates(
 	int day2, int month2, int year2) // Функция, вычисляет разность в днях между этими датами.
 {
 	int differenceIs{ 0 };
-	
+
+
 }
 
 
@@ -118,6 +119,22 @@ int DifferenceInDaysBetweenDates(
 int main()
 {
 	setlocale(LC_ALL, ""); // Работает только с потоком вывода.
+
+	int day1{ 0 }, month1{ 0 }, year1{ 0 };
+	while (DateValidationCheck(day1, month1, year1) == false)
+	{
+		cout << "Введите 1-ю дату, сначала день, месяц, затем год (22.9.2019): ";
+		cin >> day1 >> month1 >> year1;
+	};
+
+	int day2{ 0 }, month2{ 0 }, year2{ 0 };
+	while (DateValidationCheck(day1, month1, year1) == false)
+	{
+		cout << "Введите 2-ю дату, сначала день, месяц, затем год (1.10.2021): ";
+		cin >> day2 >> month2 >> year2;
+	}
+
+
 
 	return 0;
 }
