@@ -3,7 +3,6 @@
 элементов передаваемого ей массива на
 противоположный.
 */
-// НЕ РАБОТАЕТ
 
 #include <iostream>
 #include <iomanip> // Содержит setw.
@@ -34,7 +33,6 @@ void Reverses1DElemArray(int arr[], int size) // Функция меняющая
 
 int main()
 {
-	setlocale(LC_ALL, ""); // Работает только с потоком вывода.
 	srand(time(0));
 	/*
 		Функция srand() используется для установки начала последовательности,
